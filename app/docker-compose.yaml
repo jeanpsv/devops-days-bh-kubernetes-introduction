@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: ["npm", "start"]
+    environment:
+      - APP_VERSION=v1
+      - INSTANCE_NAME=only-child
+      - SECRET_KEY=my-awesome-secret-key
+      - PORT=4000
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app

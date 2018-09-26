@@ -1,0 +1,27 @@
+{
+  "name": "devops-days-bh-kubernetes-introduction",
+  "version": "1.0.0",
+  "description": "Simple NodeJS application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jeanpsv/devops-days-bh-kubernetes-introduction.git"
+  },
+  "keywords": [
+    "nodejs",
+    "kubernetes"
+  ],
+  "author": "Jean Vasconcelos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeanpsv/devops-days-bh-kubernetes-introduction/issues"
+  },
+  "homepage": "https://github.com/jeanpsv/devops-days-bh-kubernetes-introduction#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
