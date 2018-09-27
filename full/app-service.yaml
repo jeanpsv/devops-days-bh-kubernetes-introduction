@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-service
+  namespace: full-example
+spec:
+  # type: ClusterIP # or NodePort if you use Google Kubernetes Engine
+  type: LoadBalancer
+  ports:
+    - name: http # named port
+      protocol: TCP
+      port: 80
+      targetPort: http
+  selector:
+    app: devops-app
