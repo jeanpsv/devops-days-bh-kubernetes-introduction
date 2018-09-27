@@ -35,7 +35,7 @@ $ minikube start
 
 Ensure that your `kubectl` are configured to Minikube context (`$HOME/.kube/config`):
 ```bash
-$ kubectl config use-context minikue
+$ kubectl config use-context minikube
 ```
 
 #### Kubernetes simple recipes
@@ -51,15 +51,26 @@ Let's create a service to application:
 ```bash
 $ kubectl apply -f simple/app-service.yaml
 ```
-run `kubectl get svc -n simple` to see the list of services and `kubectl describe svc devops-service -n simple` to see details.
+run `kubectl get svc -n simple-example` to see the list of services and `kubectl describe svc devops-service -n simple-example` to see details.
 
 Let's deploy the application:
 ```bash
 $ kubectl apply -f simple/app-deployment.yaml
 ```
 now you can run:
-1. `kubectl get deploy -n simple` to see the deployment's list
-2. `kubectl get pods -n simple` to see the pod's list
-3. `kubectl describe deploy devops-deployment -n simple` to see the deployment's details
+1. `kubectl get deploy -n simple-example` to see the deployment's list
+2. `kubectl get pods -n simple-example` to see the pod's list
+3. `kubectl describe deploy devops-deployment -n simple-example` to see the deployment's details
 
 Run `minikube service list` to see available services' ip and then, make a request to `${ip_address}/info`.
+
+Now, let's update the application:
+```bash
+$ kubectl set image deployment/devops-deployment app=jeanpsv/devops-days-bh-kubernetes-introduction:v2 -n simple-example
+```
+
+Delete all the resources applied with `kubectl delete ns simple-example`
+
+#### Kubernetes full recipes
+
+See more in `full/` folder.
