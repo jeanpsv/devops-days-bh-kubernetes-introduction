@@ -2,9 +2,8 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: devops-deployment
-  namespace: simple-example
+  namespace: full-example
 spec:
-  replicas: 3
   template:
     metadata:
       labels:
@@ -13,30 +12,48 @@ spec:
       containers:
         - name: app
           image: jeanpsv/devops-days-bh-kubernetes-introduction:v1
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           command: ["npm", "start"]
           ports:
-            - containerPort: 4000
+            - name: http # named port
+              containerPort: 4000
           readinessProbe:
             httpGet:
-              path: /ready
-              port: 4000
+              path: /alive
+              port: http
             initialDelaySeconds: 30
             periodSeconds: 20
             timeoutSeconds: 5
           livenessProbe:
             httpGet:
               path: /alive
-              port: 4000
+              port: http
             initialDelaySeconds: 30
             periodSeconds: 20
             timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 500m
+              memory: 300Mi
+            limits:
+              cpu: 1000m
+              memory: 600Mi
           env:
             - name: INSTANCE_NAME
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
             - name: SECRET_KEY
-              value: "this-awesome-key-is-mine"
+              valueFrom:
+                secretKeyRef:
+                  name: my-secrets
+                  key: secret_key
             - name: PORT
               value: "4000"
+          volumeMounts:
+            - name: configurations
+              mountPath: /app/extra.json
+      volumes:
+        - name: configurations
+          configMap:
+            name: my-configs

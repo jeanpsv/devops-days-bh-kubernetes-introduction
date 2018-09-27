@@ -1,0 +1,13 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: devops-hpa
+  namespace: full-example
+spec:
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    name: devops-deployment
+  minReplicas: 3
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 70

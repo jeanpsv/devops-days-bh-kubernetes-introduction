@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: devops-ingress
+  namespace: full-example
+spec:
+  rules:
+    - host: "foo.bar.com"
+      http:
+        paths:
+          - backend:
+              serviceName: devops-service
+              servicePort: http
+    - host: "bar.foo.com"
+      http:
+        paths:
+          - backend:
+              serviceName: devops-service
+              servicePort: http
+    - host: "example.com"
+      http:
+        paths:
+          - path: /foo
+            backend:
+              serviceName: devops-service
+              servicePort: http
+          - path: /bar
+            backend:
+              serviceName: devops-service
+              servicePort: http

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-configs
+  namespace: full-example
+data:
+  extra.json: |
+    {
+      "event": "DevOps Days BH"
+    }
