@@ -24,3 +24,42 @@ $ docker pull jeanpsv/devops-days-bh-kubernetes-introduction:v1
 $ docker run --rm -p 4000:4000 jeanpsv/devops-days-bh-kubernetes-introduction:v1 npm start
 ```
 
+### Kubernetes
+
+#### Minikube
+
+Start minikube:
+```bash
+$ minikube start
+```
+
+Ensure that your `kubectl` are configured to Minikube context (`$HOME/.kube/config`):
+```bash
+$ kubectl config use-context minikue
+```
+
+#### Kubernetes simple recipes
+
+Let's create a namespace:
+```bash
+$ kubectl apply -f simple/namespace.yaml
+```
+check namespace's list with: `kubectl get ns`,`kubectl get namespace` or `kubectl get namespaces`
+
+
+Let's create a service to application:
+```bash
+$ kubectl apply -f simple/app-service.yaml
+```
+run `kubectl get svc -n simple` to see the list of services and `kubectl describe svc devops-service -n simple` to see details.
+
+Let's deploy the application:
+```bash
+$ kubectl apply -f simple/app-deployment.yaml
+```
+now you can run:
+1. `kubectl get deploy -n simple` to see the deployment's list
+2. `kubectl get pods -n simple` to see the pod's list
+3. `kubectl describe deploy devops-deployment -n simple` to see the deployment's details
+
+Run `minikube service list` to see available services' ip and then, make a request to `${ip_address}/info`.
