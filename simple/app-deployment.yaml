@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: devops-deployment
+  namespace: simple-example
 spec:
   replicas: 3
   template:
@@ -31,8 +32,6 @@ spec:
             periodSeconds: 20
             timeoutSeconds: 5
           env:
-            - name: APP_VERSION
-              value: "v1"
             - name: INSTANCE_NAME
               valueFrom:
                 fieldRef:
