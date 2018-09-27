@@ -4,8 +4,7 @@ metadata:
   name: devops-service
   namespace: full-example
 spec:
-  # type: ClusterIP # or NodePort if you use Google Kubernetes Engine
-  type: LoadBalancer
+  type: LoadBalancer # can be LoadBalancer, ClusterIP or NodePort
   ports:
     - name: http # named port
       protocol: TCP
